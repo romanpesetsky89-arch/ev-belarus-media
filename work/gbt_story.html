@@ -1,0 +1,66 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-ExtraBold.otf);font-weight:800}
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-Bold.otf);font-weight:700}
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-Medium.otf);font-weight:500}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--g:#2bff88;--c:#22d3ee;--y:#ffe14d;--bg:#05070d}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);font-family:IX,sans-serif;color:#fff}
+#stage{position:absolute;inset:0;overflow:hidden}
+/* futuristic background */
+.grid{position:absolute;left:-50%;right:-50%;bottom:-10%;height:70%;
+ background-image:linear-gradient(rgba(43,255,136,.35) 2px,transparent 2px),linear-gradient(90deg,rgba(34,211,238,.35) 2px,transparent 2px);
+ background-size:120px 120px;transform:perspective(700px) rotateX(62deg);transform-origin:50% 0;
+ mask-image:linear-gradient(to bottom,transparent,#000 40%)}
+.glow{position:absolute;width:1400px;height:1400px;border-radius:50%;filter:blur(120px);opacity:.55}
+.scan{position:absolute;left:0;right:0;height:240px;background:linear-gradient(transparent,rgba(43,255,136,.10),transparent)}
+.dots{position:absolute;inset:0}
+.dot{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--c);box-shadow:0 0 14px var(--c)}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 90px;text-align:center;opacity:0}
+.kicker{font-weight:700;font-size:44px;letter-spacing:10px;text-transform:uppercase;color:var(--c);margin-bottom:40px}
+.glass{background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:2px solid rgba(43,255,136,.45);
+ border-radius:48px;padding:60px 70px;box-shadow:0 0 60px rgba(43,255,136,.25),inset 0 0 40px rgba(34,211,238,.08);backdrop-filter:blur(8px)}
+.neon{color:var(--g);text-shadow:0 0 18px rgba(43,255,136,.9),0 0 60px rgba(43,255,136,.5)}
+.huge{font-weight:800;font-size:220px;letter-spacing:-8px;line-height:.95}
+.mid{font-weight:700;font-size:58px;color:#d7e3ff;margin-top:18px}
+/* cover */
+#s1{background:linear-gradient(160deg,#2bff88 0%,#1ee6b0 45%,#22d3ee 100%)}
+#s1 .gridc{position:absolute;inset:0;background-image:linear-gradient(rgba(5,7,13,.10) 2px,transparent 2px),linear-gradient(90deg,rgba(5,7,13,.10) 2px,transparent 2px);background-size:90px 90px}
+.hook{position:relative;color:#05070d;font-weight:800;font-size:104px;line-height:1.02;letter-spacing:-3px}
+.bolt{position:relative;width:240px;height:240px;margin-bottom:40px}
+.badge{position:relative;margin-top:60px;background:#05070d;color:var(--y);font-weight:800;font-size:88px;padding:26px 56px;border-radius:999px;letter-spacing:-2px;box-shadow:0 20px 60px rgba(5,7,13,.35)}
+.chip{position:relative;margin-top:44px;font-weight:700;font-size:38px;letter-spacing:8px;color:#05070d;opacity:.75}
+/* battery */
+.bat{width:560px;height:250px;border:10px solid #d7e3ff;border-radius:44px;position:relative;margin:30px 0 40px;padding:16px}
+.bat:after{content:"";position:absolute;right:-46px;top:70px;width:30px;height:90px;background:#d7e3ff;border-radius:0 16px 16px 0}
+.fill{height:100%;border-radius:24px;background:linear-gradient(90deg,var(--g),var(--c));box-shadow:0 0 40px rgba(43,255,136,.7);width:0}
+/* bars */
+.bars{width:100%;display:flex;flex-direction:column;gap:46px;margin-top:20px}
+.row{display:flex;flex-direction:column;align-items:flex-start;text-align:left}
+.rl{font-weight:700;font-size:38px;white-space:nowrap;color:#b9c6e4;margin-bottom:14px;display:flex;justify-content:space-between;width:100%}
+.rl b{color:#fff}
+.track{width:100%;height:84px;border-radius:24px;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);overflow:hidden}
+.b{height:100%;width:0;border-radius:22px;display:flex;align-items:center;justify-content:flex-end;padding-right:26px;font-weight:800;font-size:52px;color:#05070d}
+.b1{background:linear-gradient(90deg,#ff6b6b,#ffb26b)}
+.b2{background:linear-gradient(90deg,#ffb26b,#ffe14d)}
+.b3{background:linear-gradient(90deg,var(--g),var(--c));box-shadow:0 0 40px rgba(43,255,136,.8)}
+.pill{display:inline-block;background:var(--y);color:#05070d;font-weight:800;font-size:62px;padding:22px 46px;border-radius:999px;margin-top:70px;box-shadow:0 0 50px rgba(255,225,77,.5)}
+.note{color:#6f7a96;font-weight:500;font-size:36px;margin-top:50px}
+.cta1{font-weight:800;font-size:100px;line-height:1.05;letter-spacing:-3px}
+.cta2{margin-top:80px;background:linear-gradient(90deg,var(--g),var(--c));color:#05070d;font-weight:800;font-size:72px;padding:30px 56px;border-radius:30px;box-shadow:0 0 70px rgba(43,255,136,.6)}
+.save{width:150px;height:190px;margin-bottom:50px}
+.bar{position:absolute;left:0;bottom:0;height:12px;background:linear-gradient(90deg,var(--g),var(--c));box-shadow:0 0 20px var(--g)}
+</style></head><body>
+<div id="stage">
+ <div class="scene" id="s1" style="opacity:1">
+  <div class="gridc"></div>
+  <div class="chip" style="margin:0 0 50px">НОВЫЙ REEL</div>
+  <svg class="bolt" viewBox="0 0 100 100"><path d="M58 4 18 56h26l-6 40 44-56H55z" fill="#ffe14d" stroke="#05070d" stroke-width="5" stroke-linejoin="round"/></svg>
+  <div class="hook">Type 2 или GB/T?</div>
+  <div class="hook" style="font-size:60px;margin-top:30px;letter-spacing:-1px">Почему европейский кабель не вставить в «китайца»</div>
+  <div class="badge" style="font-size:72px;white-space:nowrap">Смотри в ленте ⚡</div>
+  <div class="chip">@EV.BELARUS</div>
+ </div>
+</div>
+<script>window.render=function(){};</script></body></html>
