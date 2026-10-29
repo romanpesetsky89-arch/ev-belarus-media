@@ -1,0 +1,56 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-ExtraBold.otf);font-weight:800}
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-Bold.otf);font-weight:700}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05070d;font-family:IX,sans-serif}
+.card{position:relative;overflow:hidden;background:#05070d;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.av{width:1080px;height:1080px}
+.st{width:1080px;height:1920px}
+.glow{position:absolute;border-radius:50%;filter:blur(90px)}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(43,255,136,.13) 2px,transparent 2px),linear-gradient(90deg,rgba(34,211,238,.13) 2px,transparent 2px);background-size:90px 90px;mask-image:radial-gradient(circle at 50% 50%,#000 20%,transparent 70%)}
+.ring{position:relative;border-radius:50%;display:flex;align-items:center;justify-content:center;
+ background:radial-gradient(circle,#0b1220 0%,#05070d 70%);box-shadow:0 0 80px rgba(43,255,136,.55),inset 0 0 60px rgba(34,211,238,.25)}
+.ring:before{content:"";position:absolute;inset:-14px;border-radius:50%;padding:14px;background:linear-gradient(135deg,#2bff88,#22d3ee);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.lbl{position:relative;color:#d7e3ff;font-weight:700;font-size:64px;letter-spacing:8px;text-transform:uppercase;margin-top:90px}
+</style></head><body>
+
+<!-- AVATAR -->
+<div class="card av" id="avatar">
+  <div class="glow" style="width:700px;height:700px;background:#0b7a4a;left:-150px;top:-150px;opacity:.7"></div>
+  <div class="glow" style="width:700px;height:700px;background:#0e5c7a;right:-150px;bottom:-150px;opacity:.7"></div>
+  <div class="grid"></div>
+  <svg width="760" height="760" viewBox="0 0 200 200" style="position:relative">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2bff88"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+    <filter id="f"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+    <circle cx="100" cy="100" r="88" fill="none" stroke="url(#g)" stroke-width="7" filter="url(#f)"/>
+    <circle cx="100" cy="100" r="74" fill="none" stroke="rgba(34,211,238,.35)" stroke-width="1.5" stroke-dasharray="3 5"/>
+    <path d="M110 30 64 108h30l-10 62 52-84h-31z" fill="url(#g)" filter="url(#f)"/>
+    <path d="M110 30 64 108h30l-10 62 52-84h-31z" fill="none" stroke="#eafff3" stroke-width="2" stroke-linejoin="round" opacity=".8"/>
+  </svg>
+</div>
+
+<!-- HIGHLIGHT COVERS -->
+<div id="covers"></div>
+<script>
+const icons={
+ 'Зарядка':'<path d="M38 20v14M62 20v14M30 34h40v14a20 20 0 0 1-40 0zM50 68v14" />',
+ 'Тарифы':'<circle cx="50" cy="50" r="30"/><path d="M44 66V34h10a9 9 0 0 1 0 18H38M38 58h16"/>',
+ 'Выбор':'<path d="M28 28h44v44H28z"/><path d="M36 50l9 9 19-20"/>',
+ 'Зима':'<path d="M50 18v64M22 34l56 32M22 66l56-32M42 22l8 8 8-8M42 78l8-8 8 8"/>',
+ 'Разъёмы':'<circle cx="50" cy="50" r="30"/><circle cx="40" cy="42" r="5"/><circle cx="60" cy="42" r="5"/><circle cx="50" cy="60" r="5"/>',
+ 'Вопросы':'<circle cx="50" cy="50" r="30"/><path d="M40 42a10 10 0 1 1 14 9c-3 2-4 4-4 7"/><circle cx="50" cy="67" r="1.5"/>'
+};
+const wrap=document.getElementById('covers');
+Object.entries(icons).forEach(([name,p],i)=>{
+ const d=document.createElement('div');d.className='card st';d.id='hl'+i;
+ d.innerHTML=`<div class="glow" style="width:900px;height:900px;background:#0b7a4a;left:-300px;top:200px;opacity:.6"></div>
+ <div class="glow" style="width:900px;height:900px;background:#0e5c7a;right:-300px;bottom:200px;opacity:.6"></div>
+ <div class="grid"></div>
+ <div class="ring" style="width:620px;height:620px">
+  <svg width="380" height="380" viewBox="0 0 100 100" fill="none" stroke="url(#gi${i})" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 14px rgba(43,255,136,.8))">
+   <defs><linearGradient id="gi${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2bff88"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>${p}</svg>
+ </div><div class="lbl">${name}</div>`;
+ wrap.appendChild(d);
+});
+</script>
+</body></html>
