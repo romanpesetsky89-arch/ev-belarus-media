@@ -1,0 +1,169 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-ExtraBold.otf);font-weight:800}
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-Bold.otf);font-weight:700}
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-Medium.otf);font-weight:500}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--g:#2bff88;--c:#22d3ee;--y:#ffe14d;--bg:#05070d}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);font-family:IX,sans-serif;color:#fff}
+#stage{position:absolute;inset:0;overflow:hidden}
+/* futuristic background */
+.grid{position:absolute;left:-50%;right:-50%;bottom:-10%;height:70%;
+ background-image:linear-gradient(rgba(43,255,136,.35) 2px,transparent 2px),linear-gradient(90deg,rgba(34,211,238,.35) 2px,transparent 2px);
+ background-size:120px 120px;transform:perspective(700px) rotateX(62deg);transform-origin:50% 0;
+ mask-image:linear-gradient(to bottom,transparent,#000 40%)}
+.glow{position:absolute;width:1400px;height:1400px;border-radius:50%;filter:blur(120px);opacity:.55}
+.scan{position:absolute;left:0;right:0;height:240px;background:linear-gradient(transparent,rgba(43,255,136,.10),transparent)}
+.dots{position:absolute;inset:0}
+.dot{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--c);box-shadow:0 0 14px var(--c)}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 90px;text-align:center;opacity:0}
+.kicker{font-weight:700;font-size:44px;letter-spacing:10px;text-transform:uppercase;color:var(--c);margin-bottom:40px}
+.glass{background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:2px solid rgba(43,255,136,.45);
+ border-radius:48px;padding:60px 70px;box-shadow:0 0 60px rgba(43,255,136,.25),inset 0 0 40px rgba(34,211,238,.08);backdrop-filter:blur(8px)}
+.neon{color:var(--g);text-shadow:0 0 18px rgba(43,255,136,.9),0 0 60px rgba(43,255,136,.5)}
+.huge{font-weight:800;font-size:220px;letter-spacing:-8px;line-height:.95}
+.mid{font-weight:700;font-size:58px;color:#d7e3ff;margin-top:18px}
+/* cover */
+#s1{background:linear-gradient(160deg,#2bff88 0%,#1ee6b0 45%,#22d3ee 100%)}
+#s1 .gridc{position:absolute;inset:0;background-image:linear-gradient(rgba(5,7,13,.10) 2px,transparent 2px),linear-gradient(90deg,rgba(5,7,13,.10) 2px,transparent 2px);background-size:90px 90px}
+.hook{position:relative;color:#05070d;font-weight:800;font-size:104px;line-height:1.02;letter-spacing:-3px}
+.bolt{position:relative;width:240px;height:240px;margin-bottom:40px}
+.badge{position:relative;margin-top:60px;background:#05070d;color:var(--y);font-weight:800;font-size:88px;padding:26px 56px;border-radius:999px;letter-spacing:-2px;box-shadow:0 20px 60px rgba(5,7,13,.35)}
+.chip{position:relative;margin-top:44px;font-weight:700;font-size:38px;letter-spacing:8px;color:#05070d;opacity:.75}
+/* battery */
+.bat{width:560px;height:250px;border:10px solid #d7e3ff;border-radius:44px;position:relative;margin:30px 0 40px;padding:16px}
+.bat:after{content:"";position:absolute;right:-46px;top:70px;width:30px;height:90px;background:#d7e3ff;border-radius:0 16px 16px 0}
+.fill{height:100%;border-radius:24px;background:linear-gradient(90deg,var(--g),var(--c));box-shadow:0 0 40px rgba(43,255,136,.7);width:0}
+/* bars */
+.bars{width:100%;display:flex;flex-direction:column;gap:46px;margin-top:20px}
+.row{display:flex;flex-direction:column;align-items:flex-start;text-align:left}
+.rl{font-weight:700;font-size:38px;white-space:nowrap;color:#b9c6e4;margin-bottom:14px;display:flex;justify-content:space-between;width:100%}
+.rl b{color:#fff}
+.track{width:100%;height:84px;border-radius:24px;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);overflow:hidden}
+.b{height:100%;width:0;border-radius:22px;display:flex;align-items:center;justify-content:flex-end;padding-right:26px;font-weight:800;font-size:52px;color:#05070d}
+.b1{background:linear-gradient(90deg,#ff6b6b,#ffb26b)}
+.b2{background:linear-gradient(90deg,#ffb26b,#ffe14d)}
+.b3{background:linear-gradient(90deg,var(--g),var(--c));box-shadow:0 0 40px rgba(43,255,136,.8)}
+.pill{display:inline-block;background:var(--y);color:#05070d;font-weight:800;font-size:62px;padding:22px 46px;border-radius:999px;margin-top:70px;box-shadow:0 0 50px rgba(255,225,77,.5)}
+.note{color:#6f7a96;font-weight:500;font-size:36px;margin-top:50px}
+.cta1{font-weight:800;font-size:100px;line-height:1.05;letter-spacing:-3px}
+.cta2{margin-top:80px;background:linear-gradient(90deg,var(--g),var(--c));color:#05070d;font-weight:800;font-size:72px;padding:30px 56px;border-radius:30px;box-shadow:0 0 70px rgba(43,255,136,.6)}
+.save{width:150px;height:190px;margin-bottom:50px}
+.bar{position:absolute;left:0;bottom:0;height:12px;background:linear-gradient(90deg,var(--g),var(--c));box-shadow:0 0 20px var(--g)}
+</style></head><body>
+<style>
+.src{color:#6f7a96;font-weight:500;font-size:34px;margin-top:40px}
+.rules{display:flex;flex-direction:column;gap:40px;width:100%;text-align:left}
+.rule{display:flex;align-items:center;gap:30px;font-weight:800;font-size:64px;line-height:1.1}
+.rule .n{flex:none;width:110px;height:110px;border-radius:30px;background:linear-gradient(135deg,#ff6b6b,#ffb26b);color:#05070d;font-weight:800;font-size:60px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(255,107,107,.6)}
+.stamp{position:absolute;top:300px;right:110px;border:10px solid #ff6b6b;color:#ff6b6b;font-weight:800;font-size:110px;padding:6px 40px;border-radius:24px;transform:rotate(-14deg);opacity:0;text-shadow:0 0 30px rgba(255,107,107,.6);box-shadow:0 0 40px rgba(255,107,107,.4)}
+#loop{position:absolute;inset:0;background:linear-gradient(160deg,#2bff88 0%,#1ee6b0 45%,#22d3ee 100%);opacity:0}
+</style>
+<div id="stage">
+ <div class="glow" style="background:#0b7a4a;left:-500px;top:-300px" id="g1"></div>
+ <div class="glow" style="background:#0e5c7a;right:-600px;bottom:-200px" id="g2"></div>
+ <div class="grid" id="grid"></div>
+ <div class="scan" id="scan"></div>
+ <div class="dots" id="dots"></div>
+
+ <div class="scene" id="s1">
+  <div class="gridc"></div>
+  <svg class="bolt" viewBox="0 0 100 100"><path d="M58 4 18 56h26l-6 40 44-56H55z" fill="#ffe14d" stroke="#05070d" stroke-width="5" stroke-linejoin="round"/></svg>
+  <div class="hook">Батарея умрёт через 3 года?</div>
+  <div class="badge">Ответ — в конце</div>
+  <div class="chip">EV · МИФЫ · БАТАРЕЯ</div>
+ </div>
+
+ <div class="scene" id="s2">
+  <div class="kicker">Проверили</div>
+  <div class="huge neon" id="n2" style="font-size:200px">0</div>
+  <div class="mid" style="font-size:66px">электромобилей</div>
+  <div class="src">Geotab, исследование 2025</div>
+ </div>
+
+ <div class="scene" id="s3">
+  <div class="kicker">Батарея теряет в год</div>
+  <div class="huge neon">−<span id="n3">0,0</span>%</div>
+  <div class="mid">в среднем</div>
+ </div>
+
+ <div class="scene" id="s4">
+  <div class="kicker">Через 8 лет</div>
+  <div class="bat"><div class="fill" id="fill4" style="width:100%"></div></div>
+  <div class="huge neon" style="font-size:180px"><span id="n4">100</span>%</div>
+  <div class="mid">ёмкости остаётся</div>
+  <div class="stamp" id="stamp">МИФ</div>
+ </div>
+
+ <div class="scene" id="s5">
+  <div class="kicker">Батарею меняли</div>
+  <div class="glass" style="width:100%">
+   <div class="bars">
+    <div class="row"><div class="rl">Машины 2017–2021 <b id="v1">0%</b></div><div class="track"><div class="b b2" id="b1"></div></div></div>
+    <div class="row"><div class="rl">Машины 2022+ <b id="v2">0%</b></div><div class="track"><div class="b b3" id="b2"></div></div></div>
+   </div>
+  </div>
+  <div class="src">Recurrent, без отзывных кампаний</div>
+ </div>
+
+ <div class="scene" id="s6">
+  <div class="kicker">Что реально старит</div>
+  <div class="rules">
+   <div class="rule"><div class="n">1</div><div>Частая DC-зарядка</div></div>
+   <div class="rule"><div class="n">2</div><div>Жара</div></div>
+   <div class="rule"><div class="n">3</div><div>Вечно 0% или 100%</div></div>
+  </div>
+ </div>
+
+ <div class="scene" id="s7">
+  <svg class="save" viewBox="0 0 60 76"><path d="M6 4h48v68L30 56 6 72z" fill="none" stroke="#2bff88" stroke-width="5" stroke-linejoin="round" id="savep"/></svg>
+  <div class="cta1">Сохрани и перешли</div>
+  <div class="cta2">Домашняя зарядка → @ev_car_by</div>
+ </div>
+ <div id="loop"></div>
+ <div class="bar" id="bar"></div>
+</div>
+<script>
+const T=21.5;
+const S=[['s1',0,2.4],['s2',2.4,5.2],['s3',5.2,8],['s4',8,11.2],['s5',11.2,14.6],['s6',14.6,18.4],['s7',18.4,21.5]];
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease=x=>1-Math.pow(1-clamp(x),3);
+const easeB=x=>{x=clamp(x);const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const dots=[];for(let i=0;i<40;i++){const d=document.createElement('div');d.className='dot';document.getElementById('dots').appendChild(d);dots.push({el:d,x:(i*97)%1080,y:(i*331)%1920,s:20+(i*13)%60,o:(i%7)/7});}
+const fmt=n=>n.toLocaleString('ru-RU').replace(/ /g,' ');
+window.render=function(t){
+  document.getElementById('grid').style.backgroundPosition=`0 ${t*90}px`;
+  document.getElementById('scan').style.top=((t*420)%2400-240)+'px';
+  document.getElementById('g1').style.transform=`translate(${Math.sin(t*.4)*120}px,${Math.cos(t*.3)*90}px)`;
+  document.getElementById('g2').style.transform=`translate(${Math.cos(t*.35)*120}px,${Math.sin(t*.5)*90}px)`;
+  dots.forEach(d=>{const y=((d.y-t*d.s*4)%1920+1920)%1920;const x=d.x+Math.sin(t+d.o*6)*30;d.el.style.transform=`translate(${x}px,${y}px)`;d.el.style.opacity=.3+.7*Math.abs(Math.sin(t*1.5+d.o*6));});
+  for(const [id,a,b] of S){
+    const el=document.getElementById(id); const l=t-a, len=b-a;
+    if(t<a||t>=b){el.style.opacity=0;continue;}
+    const fin=id==='s1'?1:ease(l/0.3), fout=id==='s7'?1:1-clamp((l-(len-0.25))/0.25);
+    const z=id==='s1'?1:1+0.08*(1-ease(l/0.4));
+    el.style.opacity=Math.min(fin,fout);
+    el.style.transform=`scale(${z*(fout<1?1+0.06*(1-fout):1)})`;
+    el.style.filter=fout<1?`blur(${(1-fout)*14}px)`:(l<0.25&&id!=='s1'?`blur(${(1-ease(l/0.25))*10}px)`:'none');
+    [...el.children].forEach((k,i)=>{
+      if(id==='s1'){ if(k.classList.contains('bolt')){k.style.transform=`rotate(${Math.sin(t*6)*4}deg) scale(${1+0.05*Math.sin(t*8)})`;}
+        if(k.classList.contains('badge')){k.style.transform=`scale(${1+0.035*Math.sin(t*5)})`;} return;}
+      if(k.classList.contains('stamp'))return;
+      if(id==='s6'&&k.classList.contains('rules')){k.style.opacity=1;[...k.children].forEach((r,j)=>{const d=easeB((l-0.3-j*0.9)/0.5);r.style.opacity=clamp((l-0.3-j*0.9)/0.3);r.style.transform=`translateX(${(1-d)*-120}px)`;});return;}
+      const d=easeB((l-0.1*i)/0.5); k.style.opacity=clamp((l-0.1*i)/0.3); k.style.transform=`translateY(${(1-d)*80}px)`;
+    });
+  }
+  if(t>=2.4&&t<5.2){document.getElementById('n2').textContent=fmt(Math.round(22700*ease((t-2.6)/1.6)/100)*100);}
+  if(t>=5.2&&t<8){document.getElementById('n3').textContent=(2.3*ease((t-5.5)/1.3)).toFixed(1).replace('.',',');
+    document.getElementById('s3').querySelector('.huge').style.transform=`scale(${t>6.8&&t<7.2?1.12:1})`;}
+  if(t>=8&&t<11.2){const p=ease((t-8.4)/1.8);document.getElementById('fill4').style.width=(100-18*p)+'%';document.getElementById('n4').textContent=Math.round(100-18*p);
+    const st=document.getElementById('stamp');const q=easeB((t-10.3)/0.35);st.style.opacity=clamp((t-10.3)/0.15);st.style.transform=`rotate(-14deg) scale(${2-q})`;}
+  if(t>=11.2&&t<14.6){[[1,2,0,11.7],[2,0.3,1,12.8]].forEach(([i,v,dec,s])=>{const p=ease((t-s)/1.0);document.getElementById('b'+i).style.width=Math.max(v*p*10,v>0.5?0:p*3)+'%';document.getElementById('v'+i).textContent=(v*p).toFixed(dec).replace('.',',')+'%';});}
+  if(t>=18.4){const sp=document.getElementById('savep');sp.setAttribute('fill',t>19.2?'#2bff88':'none');sp.parentNode.style.transform=`scale(${t>19.2&&t<19.6?1.2:1})`;}
+  document.getElementById('loop').style.opacity=clamp((t-(T-0.5))/0.5);
+  document.getElementById('bar').style.width=(t/T*100)+'%';
+};
+window.render(0);
+</script>
+</body></html>
