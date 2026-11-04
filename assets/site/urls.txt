@@ -1,0 +1,9 @@
+# Реальные фото товаров с ev-car.by (по одному URL в строке). Workflow скачивает их в assets/site/.
+https://ev-car.by/image/catalog/EV-Dance/16A_ekran/IMG_3930-Photoroom.jpg
+https://ev-car.by/image/catalog/Auxus/auxus_b3/TushkaB332_new_logo-Photoroom.jpg
+https://ev-car.by/image/catalog/CCS2-CCS1/IMG_6007.jpg
+https://ev-car.by/image/catalog/krepezh/TYPE2/IMG_5249-Photoroom.jpg
+https://ev-car.by/image/catalog/krepezh/GBT/IMG_5243-Photoroom.jpg
+https://ev-car.by/image/catalog/TARYDC20/20dcok.jpg
+https://ev-car.by/image/catalog/products/TeslaCCS2AC+DC/Photoroom-20250205_130801(1).jpg
+https://ev-car.by/image/catalog/Kabeli/t2-gbt/7kw_5m/photo_8_2025-10-25_14-38-46(1).jpg
