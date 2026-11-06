@@ -1,0 +1,112 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-ExtraBold.otf);font-weight:800}
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-Bold.otf);font-weight:700}
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-Medium.otf);font-weight:500}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05070d;font-family:IX,sans-serif;color:#fff}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;background:radial-gradient(circle at 20% 10%,#0f3a26 0%,#05070d 55%),#05070d;display:flex;flex-direction:column;justify-content:center;padding:150px 130px}
+.slide:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(43,255,136,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(34,211,238,.07) 2px,transparent 2px);background-size:90px 90px;mask-image:linear-gradient(to bottom,transparent,#000 70%)}
+.slide>*{position:relative}
+.num{position:absolute;top:70px;right:90px;font-weight:700;font-size:34px;color:#6f7a96}
+.handle{position:absolute;bottom:60px;left:130px;font-weight:700;font-size:32px;color:#2bff88;opacity:.85}
+.kick{font-weight:700;font-size:36px;letter-spacing:6px;text-transform:uppercase;color:#22d3ee;margin-bottom:34px}
+h1{font-weight:800;font-size:118px;line-height:1.02;letter-spacing:-4px}
+h2{font-weight:800;font-size:84px;line-height:1.05;letter-spacing:-2px;margin-bottom:40px}
+p{font-weight:500;font-size:46px;line-height:1.3;color:#d7e3ff}
+.g{color:#2bff88}.y{color:#ffe14d}.r{color:#ff6b6b}
+.big{font-weight:800;font-size:170px;letter-spacing:-6px;line-height:1;margin:20px 0}
+.photo{display:block;margin-top:50px;width:420px;height:420px;object-fit:contain;background:#fff;border-radius:40px;padding:26px;box-shadow:0 0 60px rgba(43,255,136,.35)}
+.card{background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:2px solid rgba(43,255,136,.4);border-radius:36px;padding:40px 46px;margin-top:20px}
+.row{display:flex;justify-content:space-between;font-weight:700;font-size:48px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.row:last-child{border:0}
+ul{list-style:none}
+li{font-weight:700;font-size:50px;line-height:1.2;padding:18px 0 18px 80px;position:relative}
+li:before{content:"✓";position:absolute;left:0;top:14px;width:58px;height:58px;border-radius:16px;background:#2bff88;color:#05070d;font-size:40px;display:flex;align-items:center;justify-content:center}
+.btn{display:inline-block;margin-top:60px;background:linear-gradient(90deg,#2bff88,#22d3ee);color:#05070d;font-weight:800;font-size:56px;padding:30px 50px;border-radius:28px}
+</style></head><body>
+
+<section class="slide">
+ <div class="kick">Перед покупкой зарядки</div>
+ <h1>Переплатил за зарядку<span class="g">?</span></h1>
+ <p style="margin-top:40px;font-size:52px">Проверь 5 ошибок — листай →</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">2/9</div>
+ <h2>Одна ошибка — и зарядка медленнее <span class="y">в 2–3 раза</span></h2>
+ <p>Станция, сеть дома и машина работают в связке. Скорость решает самое слабое звено.</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">3/9</div>
+ <div class="kick">Ошибка 1</div>
+ <h2>Не узнал, сколько берёт машина</h2>
+ <p>Однофазная бортовая зарядка возьмёт со станции на 11 кВт только</p>
+ <div class="big r">3,7 кВт</div>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">4/9</div>
+ <div class="kick">Ошибка 2</div>
+ <h2>Не проверил сеть дома</h2>
+ <div class="card">
+  <div class="row"><span>1 фаза · 16 А</span><span class="g">3,7 кВт</span></div>
+  <div class="row"><span>1 фаза · 32 А</span><span class="g">7,4 кВт</span></div>
+  <div class="row"><span>3 фазы · 16 А</span><span class="g">11 кВт</span></div>
+ </div>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">5/9</div>
+ <div class="kick">Ошибка 3</div>
+ <h2>Перепутал разъём</h2>
+ <p>Type 2 — у европейских машин.<br>GB/T — у машин для Китая.<br>Нужен свой кабель или переходник.</p>
+ <img class="photo" src="../assets/site/photo_8_2025-10-25_14-38-46_1_.jpg">
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">6/9</div>
+ <div class="kick">Ошибка 4</div>
+ <h2>Заряжает через удлинитель</h2>
+ <p>Зарядка — нагрузка на 8–10 часов подряд. Контакты греются, вилка плавится.</p>
+ <p style="margin-top:30px" class="g">Только прямо в розетку. Отдельную линию тянет электрик.</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">7/9</div>
+ <div class="kick">Ошибка 5</div>
+ <h2>Заряжает днём, а не ночью</h2>
+ <p>Москва, ночной тариф:</p>
+ <div class="big g">4,85 ₽</div>
+ <p>вместо 8,90 ₽ днём. Станция с таймером сама начнёт ночью.</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">8/9</div>
+ <h2>Чек-лист перед покупкой</h2>
+ <ul>
+  <li>Мощность и фазы бортовой зарядки машины</li>
+  <li>Фазы и ток в доме</li>
+  <li>Разъём: Type 2 или GB/T</li>
+  <li>Прямая розетка или отдельная линия</li>
+  <li>Таймер под ночной тариф</li>
+ </ul>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">9/9</div>
+ <h2>Не хочешь считать сам?</h2>
+ <p>Напиши модель машины в комментариях — подскажем, какая зарядка ей нужна.</p>
+ <div class="btn">Подбор → @ev_car_by</div>
+ <img class="photo" style="width:340px;height:340px" src="../assets/site/IMG_3930-Photoroom.jpg">
+ <div class="handle">@ev.belarus</div>
+</section>
+</body></html>
