@@ -15,7 +15,7 @@ jobs:
         with: { ref: media }
       - uses: actions/setup-python@v5
         with: { python-version: "3.11" }
-      - run: pip install -q edge-tts piper-tts
+      - run: pip install -q edge-tts piper-tts && sudo apt-get install -y -qq ffmpeg >/dev/null
       - name: Piper voice (fallback)
         run: |
           mkdir -p /tmp/pv && cd /tmp/pv
