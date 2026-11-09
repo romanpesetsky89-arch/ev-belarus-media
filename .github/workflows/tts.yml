@@ -1,0 +1,31 @@
+name: tts-voiceover
+on:
+  push:
+    branches: [media]
+    paths: ["voice/*.txt"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  tts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: media }
+      - run: pip install -q edge-tts
+      - name: Synthesize missing voiceovers
+        run: |
+          for t in voice/*.txt; do
+            b="${t%.txt}"
+            [ -f "$b.mp3" ] && continue
+            # первая строка файла может задавать голос: VOICE=ru-RU-DmitryNeural RATE=+10%
+            v=ru-RU-DmitryNeural; r=+8%
+            head -1 "$t" | grep -q '^VOICE=' && { eval "$(head -1 "$t")"; v=$VOICE; r=${RATE:-+8%}; tail -n +2 "$t" > /tmp/body.txt; } || cp "$t" /tmp/body.txt
+            edge-tts --voice "$v" --rate="$r" -f /tmp/body.txt --write-media "$b.mp3" --write-subtitles "$b.vtt"
+          done
+      - name: Commit
+        run: |
+          git config user.name "tts-bot"; git config user.email "tts-bot@users.noreply.github.com"
+          git add voice; git diff --cached --quiet && exit 0
+          git commit -m "tts [skip ci]"; git pull --rebase -q origin media; git push -q origin HEAD:media
