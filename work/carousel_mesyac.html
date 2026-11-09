@@ -1,0 +1,132 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-ExtraBold.otf);font-weight:800}
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-Bold.otf);font-weight:700}
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-Medium.otf);font-weight:500}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05070d;font-family:IX,sans-serif;color:#fff}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;background:radial-gradient(circle at 20% 10%,#0f3a26 0%,#05070d 55%),#05070d;display:flex;flex-direction:column;justify-content:center;padding:150px 130px}
+.slide:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(43,255,136,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(34,211,238,.07) 2px,transparent 2px);background-size:90px 90px;mask-image:linear-gradient(to bottom,transparent,#000 70%)}
+.slide>*{position:relative}
+.num{position:absolute;top:70px;right:90px;font-weight:700;font-size:34px;color:#6f7a96}
+.handle{position:absolute;bottom:60px;left:130px;font-weight:700;font-size:32px;color:#2bff88;opacity:.85}
+.kick{font-weight:700;font-size:36px;letter-spacing:6px;text-transform:uppercase;color:#22d3ee;margin-bottom:34px}
+h1{font-weight:800;font-size:118px;line-height:1.02;letter-spacing:-4px}
+h2{font-weight:800;font-size:84px;line-height:1.05;letter-spacing:-2px;margin-bottom:40px}
+p{font-weight:500;font-size:46px;line-height:1.3;color:#d7e3ff}
+.g{color:#2bff88}.y{color:#ffe14d}.r{color:#ff6b6b}
+.big{font-weight:800;font-size:170px;letter-spacing:-6px;line-height:1;margin:20px 0}
+.photo{display:block;margin-top:50px;width:420px;height:420px;object-fit:contain;background:#fff;border-radius:40px;padding:26px;box-shadow:0 0 60px rgba(43,255,136,.35)}
+.card{background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:2px solid rgba(43,255,136,.4);border-radius:36px;padding:40px 46px;margin-top:20px}
+.row{display:flex;justify-content:space-between;font-weight:700;font-size:48px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.row:last-child{border:0}
+ul{list-style:none}
+li{font-weight:700;font-size:50px;line-height:1.2;padding:18px 0 18px 80px;position:relative}
+li:before{content:"✓";position:absolute;left:0;top:14px;width:58px;height:58px;border-radius:16px;background:#2bff88;color:#05070d;font-size:40px;display:flex;align-items:center;justify-content:center}
+.btn{display:inline-block;margin-top:60px;background:linear-gradient(90deg,#2bff88,#22d3ee);color:#05070d;font-weight:800;font-size:56px;padding:30px 50px;border-radius:28px}
+.src{font-weight:500;font-size:32px;color:#6f7a96;margin-top:30px}
+</style></head><body>
+<section class="slide">
+ <div class="kick">Деньги · Беларусь и Россия</div>
+ <h1>Месяц на электро&shy;мобиле: <span class="g">49</span> или <span class="r">328</span> руб<span class="y">?</span></h1>
+ <p style="margin-top:40px;font-size:52px">4 способа заряжаться — от дорогого к дешёвому. Листай →</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">2/10</div>
+ <h2>Одна машина — разница <span class="y">в 4 раза</span></h2>
+ <div class="card">
+  <div class="row"><span>Пробег в месяц</span><span>1500 км</span></div>
+  <div class="row"><span>Расход</span><span>18 кВт·ч/100 км</span></div>
+  <div class="row"><span>Нужно энергии</span><span class="g">270 кВт·ч</span></div>
+ </div>
+ <p style="margin-top:40px">Решает не машина, а <b>где и когда</b> ты заряжаешься.</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">3/10</div>
+ <div class="kick">Точка отсчёта</div>
+ <h2>Бензин</h2>
+ <p>Тот же пробег на машине с расходом 8 л/100 км:</p>
+ <div class="big r">328 руб</div>
+ <p>120 л × 2,73 руб — АИ-95 с 4 ноября 2026.</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">4/10</div>
+ <div class="kick">Способ 1 · дороже всего</div>
+ <h2>Только быстрая Malanka DC</h2>
+ <div class="big r">197 руб</div>
+ <p>270 кВт·ч × 0,73 руб. Удобно в дороге, но заряжаться так каждый день — переплата.</p>
+ <img class="photo" style="width:340px;height:340px;margin-top:40px" src="../assets/site/20dcok.jpg">
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">5/10</div>
+ <div class="kick">Способ 2</div>
+ <h2>Медленная Malanka AC</h2>
+ <div class="big y">149 руб</div>
+ <p>270 кВт·ч × 0,55 руб. Дешевле быстрой, но машина часами стоит у станции.</p>
+ <img class="photo" style="width:340px;height:340px;margin-top:40px" src="../assets/site/photo_8_2025-10-25_14-38-46_1_.jpg">
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">6/10</div>
+ <div class="kick">Способ 3</div>
+ <h2>Дома по общему тарифу</h2>
+ <div class="big g">82 руб</div>
+ <p>270 кВт·ч × 0,3037 руб (газовая плита). С электроплитой — <span class="g">70 руб</span>.</p>
+ <img class="photo" style="width:340px;height:340px;margin-top:40px" src="../assets/site/IMG_3930-Photoroom.jpg">
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">7/10</div>
+ <div class="kick">Способ 4 · дешевле всего</div>
+ <h2>Дома ночью, трёхзонный счётчик</h2>
+ <div class="big g">49 руб</div>
+ <p>Старт в 23:00, 0,1822 руб/кВт·ч. С электроплитой — <span class="g">42 руб</span>. В выходные весь день по минимальной ставке.</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">8/10</div>
+ <div class="kick">Россия</div>
+ <h2>А в Москве?</h2>
+ <p>Те же 1500 км в месяц:</p>
+ <div class="card">
+  <div class="row"><span>Бензин АИ-95</span><span class="r">≈ 8 995 ₽</span></div>
+  <div class="row"><span>Дома, 8,90 ₽</span><span class="y">≈ 2 403 ₽</span></div>
+  <div class="row"><span>Дома ночью, 4,85 ₽</span><span class="g">≈ 1 310 ₽</span></div>
+ </div>
+ <p class="src">Тарифы для квартир с 01.10.2026; АИ-95 74,96 ₽ — МТА, 26.10–02.11</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">9/10</div>
+ <h2>Шпаргалка: 1500 км в месяц</h2>
+ <div class="card">
+  <div class="row"><span>⛽ Бензин</span><span class="r">328 руб</span></div>
+  <div class="row"><span>⚡ Malanka DC</span><span class="r">197 руб</span></div>
+  <div class="row"><span>🔌 Malanka AC</span><span class="y">149 руб</span></div>
+  <div class="row"><span>🏠 Дома</span><span class="g">82 руб</span></div>
+  <div class="row"><span>🌙 Дома ночью</span><span class="g">49 руб</span></div>
+ </div>
+ <p style="margin-top:36px">Ночь дома вместо бензина —&nbsp;<span class="y">≈&nbsp;279&nbsp;руб</span> в кармане каждый месяц.</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">10/10</div>
+ <h2>Посчитаем <span class="g">твой</span> месяц</h2>
+ <p>Напиши модель машины и пробег в комментариях — посчитаем и подскажем, какая домашняя зарядка нужна.</p>
+ <div class="btn">Подбор → @ev_car_by</div>
+ <img class="photo" style="width:300px;height:300px" src="../assets/site/TushkaB332_new_logo-Photoroom.jpg">
+ <div class="handle">@ev.belarus</div>
+</section>
+</body></html>
