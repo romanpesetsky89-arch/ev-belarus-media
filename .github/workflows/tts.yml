@@ -13,7 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { ref: media }
-      - run: pip install -q edge-tts
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install -q edge-tts piper-tts
+      - name: Piper voice (fallback)
+        run: |
+          mkdir -p /tmp/pv && cd /tmp/pv
+          curl -fsSL -o ru.onnx https://huggingface.co/rhasspy/piper-voices/resolve/main/ru/ru_RU/dmitri/medium/ru_RU-dmitri-medium.onnx
+          curl -fsSL -o ru.onnx.json https://huggingface.co/rhasspy/piper-voices/resolve/main/ru/ru_RU/dmitri/medium/ru_RU-dmitri-medium.onnx.json
       - name: Synthesize missing voiceovers
         run: |
           for t in voice/*.txt; do
@@ -22,7 +29,7 @@ jobs:
             # первая строка файла может задавать голос: VOICE=ru-RU-DmitryNeural RATE=+10%
             v=ru-RU-DmitryNeural; r=+8%
             head -1 "$t" | grep -q '^VOICE=' && { eval "$(head -1 "$t")"; v=$VOICE; r=${RATE:-+8%}; tail -n +2 "$t" > /tmp/body.txt; } || cp "$t" /tmp/body.txt
-            edge-tts --voice "$v" --rate="$r" -f /tmp/body.txt --write-media "$b.mp3" --write-subtitles "$b.vtt"
+            edge-tts --voice "$v" --rate="$r" -f /tmp/body.txt --write-media "$b.mp3" --write-subtitles "$b.vtt" || { echo "edge-tts failed, piper"; python -m piper -m /tmp/pv/ru.onnx --length-scale 0.92 -f "$b.wav" < /tmp/body.txt && ffmpeg -y -loglevel error -i "$b.wav" -b:a 160k "$b.mp3" && rm "$b.wav"; }
           done
       - name: Commit
         run: |
