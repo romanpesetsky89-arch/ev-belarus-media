@@ -19,3 +19,8 @@
 5. Проверить кадры (кадр 0 и середины сцен) глазами, что текст не обрезан.
 6. `git add videos/<файл>.mp4 && git commit -m "..." && git push origin media`
 7. Удалять ролики старше 30 дней (они уже в Metricool/Instagram).
+
+## Голос (Стратегия 2.0, обязательно)
+1. voice/<файл>.txt → push в media → Actions «tts-voiceover» создаёт voice/<файл>.mp3 (git pull через 1–2 мин).
+2. `ffmpeg -y -framerate 25 -i frames/f%05d.jpg -i music.wav -i voice/<файл>.mp3 -filter_complex "[2:a]volume=1.6[v];[1:a]volume=0.18[m];[v][m]amix=inputs=2:duration=first:normalize=0[a]" -map 0:v -map "[a]" -c:v libx264 -preset veryfast -crf 25 -pix_fmt yuv420p -c:a aac -b:a 128k -t <сек> -movflags +faststart videos/<файл>.mp4`
+3. Пример сцен с субтитрами под голос: work/zeekr001.html.

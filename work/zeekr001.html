@@ -1,0 +1,70 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-ExtraBold.otf);font-weight:800}
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-Bold.otf);font-weight:700}
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-Medium.otf);font-weight:500}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#05070d;font-family:IX,sans-serif;color:#fff}
+#bg{position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,#0f3a26 0%,#05070d 60%)}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(43,255,136,.08) 2px,transparent 2px),linear-gradient(90deg,rgba(34,211,238,.08) 2px,transparent 2px);background-size:90px 90px}
+.tag{position:absolute;top:230px;left:90px;font-weight:700;font-size:40px;letter-spacing:6px;color:#22d3ee;text-transform:uppercase}
+.scene{position:absolute;inset:0;padding:0 90px;display:flex;flex-direction:column;justify-content:center;opacity:0}
+.model{font-weight:800;font-size:150px;letter-spacing:-5px;line-height:1}
+.q{font-weight:800;font-size:96px;letter-spacing:-3px;line-height:1.05;margin-top:30px}
+.g{color:#2bff88}.y{color:#ffe14d}.r{color:#ff6b6b}
+.bars{display:flex;flex-direction:column;gap:46px}
+.row .lbl{display:flex;justify-content:space-between;font-weight:700;font-size:50px;margin-bottom:14px}
+.track{height:96px;border-radius:26px;background:rgba(255,255,255,.06);overflow:hidden}
+.b{height:100%;width:0;border-radius:26px}
+.huge{font-weight:800;font-size:330px;letter-spacing:-12px;line-height:1}
+.sub{position:absolute;left:70px;right:70px;bottom:430px;text-align:center;font-weight:800;font-size:58px;line-height:1.15;text-shadow:0 4px 18px #000}
+.sub span{background:rgba(5,7,13,.75);padding:6px 18px;border-radius:14px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.ep{position:absolute;bottom:300px;left:0;right:0;text-align:center;font-weight:700;font-size:36px;color:#6f7a96}
+.bar{position:absolute;left:0;bottom:0;height:12px;background:linear-gradient(90deg,#2bff88,#22d3ee)}
+</style></head><body>
+<div id="bg"></div><div class="grid" id="grid"></div>
+<div class="tag">Серия · 100 км на твоей машине · №1</div>
+
+<div class="scene" id="s1">
+ <div class="model">ZEEKR 001</div>
+ <div class="q">100 км в Беларуси =&nbsp;<span class="g">? руб</span></div>
+</div>
+
+<div class="scene" id="s2">
+ <div class="bars">
+  <div class="row"><div class="lbl"><span>⛽ Бензиновый кроссовер</span><span id="v0"></span></div><div class="track"><div class="b" id="b0" style="background:linear-gradient(90deg,#ff6b6b,#ff9b6b)"></div></div></div>
+  <div class="row"><div class="lbl"><span>⚡ Быстрая станция</span><span id="v1"></span></div><div class="track"><div class="b" id="b1" style="background:linear-gradient(90deg,#ffb26b,#ffe14d)"></div></div></div>
+  <div class="row"><div class="lbl"><span>🏠 Дома</span><span id="v2"></span></div><div class="track"><div class="b" id="b2" style="background:linear-gradient(90deg,#2bff88,#22d3ee)"></div></div></div>
+  <div class="row"><div class="lbl"><span>🌙 Дома ночью</span><span id="v3"></span></div><div class="track"><div class="b" id="b3" style="background:linear-gradient(90deg,#22d3ee,#9fdcff)"></div></div></div>
+ </div>
+</div>
+
+<div class="scene" id="s3" style="align-items:center;text-align:center">
+ <div class="huge g">×6</div>
+ <div class="q" style="font-size:80px">дешевле бензина</div>
+</div>
+
+<div class="scene" id="s4" style="align-items:center;text-align:center">
+ <div class="q" style="font-size:88px">Какая у тебя машина?</div>
+ <div class="q y" style="font-size:64px;margin-top:40px">Напиши — посчитаю следующей 👇</div>
+</div>
+
+<div class="sub" id="sub"></div>
+<div class="ep">летом ~20 кВт·ч/100 км · тарифы РБ 2026 · АИ-95 2,73 руб</div>
+<div class="bar" id="bar"></div>
+<script>
+const T=15.6;
+const SUBS=[[0,3.3,'Сколько стоит проехать 100 км на Zeekr 001 в Беларуси?'],[3.45,5.75,'Бензиновый кроссовер — 22 рубля'],[5.75,7.77,'Zeekr на быстрой станции — 15'],[7.77,8.87,'Дома — 6 рублей'],[8.87,10.24,'А ночью — меньше 4'],[10.24,11.99,'В 6 раз дешевле бензина'],[11.99,15.6,'Напиши свою машину — посчитаю следующей']];
+const S=[['s1',0,3.4],['s2',3.4,10.24],['s3',10.24,12],['s4',12,15.6]];
+const BARS=[[21.84,'21,8 руб',3.6],[14.60,'14,6 руб',5.9],[6.07,'6,1 руб',7.9],[3.64,'3,6 руб',9.0]];
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>1-Math.pow(1-clamp(x),3);
+window.render=function(t){
+ document.getElementById('grid').style.backgroundPosition=`0 ${t*60}px`;
+ for(const [id,a,b] of S){const el=document.getElementById(id);if(t<a||t>=b){el.style.opacity=0;continue;}
+  const l=t-a;el.style.opacity=id==='s1'?1:ease(l/0.25);el.style.transform=`scale(${id==='s1'?1:1+0.06*(1-ease(l/0.35))})`;}
+ BARS.forEach(([v,txt,st],i)=>{const p=ease((t-st)/0.7);document.getElementById('b'+i).style.width=(v/21.84*100*p)+'%';document.getElementById('v'+i).textContent=p>0.05?txt:'';});
+ const s=SUBS.find(x=>t>=x[0]&&t<x[1]);document.getElementById('sub').innerHTML=s?'<span>'+s[2]+'</span>':'';
+ const h=document.querySelector('#s3 .huge');if(t>=10.24){const k=1+0.08*Math.sin((t-10.24)*10)*Math.max(0,1-(t-10.24));h.style.transform=`scale(${k})`;}
+ document.getElementById('bar').style.width=(t/T*100)+'%';
+};
+window.render(0);
+</script></body></html>
