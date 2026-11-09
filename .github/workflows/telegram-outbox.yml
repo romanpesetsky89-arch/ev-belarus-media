@@ -1,0 +1,56 @@
+name: telegram-outbox
+# Отправляет outbox_pending/*.json владельцу в Telegram и переносит в outbox_sent/.
+# Нужен секрет репозитория TELEGRAM_BOT_TOKEN (токен бота @ev_belarus_content_bot).
+on:
+  push:
+    branches: [media]
+    paths: ["outbox_pending/**"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: { group: telegram-outbox, cancel-in-progress: false }
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: media }
+      - name: Send
+        env:
+          TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: "1815051556"
+        run: |
+          python3 - <<'EOF'
+          import json, os, glob, shutil, urllib.request, urllib.parse, sys
+          tok = os.environ.get("TOKEN")
+          if not tok:
+              print("::error::Нет секрета TELEGRAM_BOT_TOKEN"); sys.exit(1)
+          chat = os.environ["CHAT_ID"]
+          os.makedirs("outbox_sent", exist_ok=True)
+          def call(method, data):
+              req = urllib.request.Request(f"https://api.telegram.org/bot{tok}/{method}",
+                  data=urllib.parse.urlencode(data).encode())
+              return json.load(urllib.request.urlopen(req, timeout=120))
+          failed = 0
+          for f in sorted(glob.glob("outbox_pending/*.json")):
+              m = json.load(open(f, encoding="utf-8"))
+              t = m.get("type", "message")
+              d = {"chat_id": chat}
+              if m.get("parse_mode"): d["parse_mode"] = m["parse_mode"]
+              if m.get("caption"): d["caption"] = m["caption"]
+              try:
+                  if t == "video": d["video"] = m["video"]; r = call("sendVideo", d)
+                  elif t == "photo": d["photo"] = m["photo"]; r = call("sendPhoto", d)
+                  else: d["text"] = m["text"]; r = call("sendMessage", d)
+                  print(f, r.get("ok"))
+                  shutil.move(f, "outbox_sent/" + os.path.basename(f))
+              except Exception as e:
+                  failed += 1; print(f"::warning::{f}: {e}")
+          sys.exit(1 if failed else 0)
+          EOF
+      - name: Commit
+        if: always()
+        run: |
+          git config user.name "outbox-bot"; git config user.email "outbox-bot@users.noreply.github.com"
+          git add -A outbox_pending outbox_sent; git diff --cached --quiet && exit 0
+          git commit -m "telegram: отправлено [skip ci]"; git pull --rebase -q origin media; git push -q origin HEAD:media

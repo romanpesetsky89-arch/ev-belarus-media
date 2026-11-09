@@ -134,6 +134,7 @@ KPI, которые отслеживаешь каждую неделю: прос
 ## 9. Технические данные
 - Metricool: blogId 7719750, таймзона Europe/Minsk.
 - Telegram: бот @ev_belarus_content_bot через AnythingMCP (Telegram Bot API), владелец chat_id "1815051556" (строкой).
+- Мост в Telegram (с 09.11): положи файлы в ev-belarus-media/outbox_pending/<ГГГГММДДTЧЧММ>_<N>_<тип>.json (ветка media) и push — workflow telegram-outbox сам отправит их владельцу и перенесёт в outbox_sent/. Форматы: {"type":"video","video":"<url>"}, {"type":"photo","photo":"<url>"}, {"type":"message","parse_mode":"HTML","text":"..."}. Если ev-belarus-bot доступен — можно и через него.
 - Видео и картинки: репозиторий romanpesetsky89-arch/ev-belarus-media, ветка media; ссылка https://raw.githubusercontent.com/romanpesetsky89-arch/ev-belarus-media/media/<путь>.
 - Стратегия: https://claude.ai/artifact/3qyu13J6CiNtx9brKe7iXR
 - Проверенные цифры: Маланка (с 10.03.2026) быстрая 0,73 руб/кВт·ч, медленная 0,55; домашние тарифы — см. раздел «ТАРИФЫ БЕЛАРУСИ»; средний расход ~18 кВт·ч/100 км; на 1.10.2026 в Беларуси >73 тыс. электромобилей.
