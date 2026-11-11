@@ -1,0 +1,125 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-ExtraBold.otf);font-weight:800}
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-Bold.otf);font-weight:700}
+@font-face{font-family:IX;src:url(file:///usr/share/fonts/opentype/inter/Inter-Medium.otf);font-weight:500}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05070d;font-family:IX,sans-serif;color:#fff}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;background:radial-gradient(circle at 20% 10%,#0f3a26 0%,#05070d 55%),#05070d;display:flex;flex-direction:column;justify-content:center;padding:150px 130px}
+.slide:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(43,255,136,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(34,211,238,.07) 2px,transparent 2px);background-size:90px 90px;mask-image:linear-gradient(to bottom,transparent,#000 70%)}
+.slide>*{position:relative}
+.num{position:absolute;top:70px;right:90px;font-weight:700;font-size:34px;color:#6f7a96}
+.handle{position:absolute;bottom:60px;left:130px;font-weight:700;font-size:32px;color:#2bff88;opacity:.85}
+.kick{font-weight:700;font-size:36px;letter-spacing:6px;text-transform:uppercase;color:#22d3ee;margin-bottom:34px}
+h1{font-weight:800;font-size:118px;line-height:1.02;letter-spacing:-4px}
+h2{font-weight:800;font-size:84px;line-height:1.05;letter-spacing:-2px;margin-bottom:40px}
+p{font-weight:500;font-size:46px;line-height:1.3;color:#d7e3ff}
+.g{color:#2bff88}.y{color:#ffe14d}.r{color:#ff6b6b}
+.big{font-weight:800;font-size:170px;letter-spacing:-6px;line-height:1;margin:20px 0}
+.photo{display:block;margin-top:50px;width:420px;height:420px;object-fit:contain;background:#fff;border-radius:40px;padding:26px;box-shadow:0 0 60px rgba(43,255,136,.35)}
+.card{background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:2px solid rgba(43,255,136,.4);border-radius:36px;padding:40px 46px;margin-top:20px}
+.row{display:flex;justify-content:space-between;font-weight:700;font-size:48px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.row:last-child{border:0}
+.row span:last-child{white-space:nowrap;margin-left:30px}
+ul{list-style:none}
+li{font-weight:700;font-size:50px;line-height:1.2;padding:18px 0 18px 80px;position:relative}
+li:before{content:"✓";position:absolute;left:0;top:14px;width:58px;height:58px;border-radius:16px;background:#2bff88;color:#05070d;font-size:40px;display:flex;align-items:center;justify-content:center}
+.btn{display:inline-block;margin-top:60px;background:linear-gradient(90deg,#2bff88,#22d3ee);color:#05070d;font-weight:800;font-size:56px;padding:30px 50px;border-radius:28px}
+.src{font-weight:500;font-size:32px;color:#6f7a96;margin-top:30px}
+</style></head><body>
+<section class="slide">
+ <div class="kick">Батарея · 22 700 машин</div>
+ <h1>Батарея через 8&nbsp;лет: <span class="g">88%</span> или <span class="r">76%</span><span class="y">?</span></h1>
+ <p style="margin-top:40px;font-size:52px">Разницу дают 5 привычек зарядки. Листай →</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">2/9</div>
+ <h2>Батарея — самая дорогая деталь</h2>
+ <div class="card">
+  <div class="row"><span>Потеря в среднем</span><span class="y">2,3% в год</span></div>
+  <div class="row"><span>Через 8 лет</span><span class="g">≈ 82%</span></div>
+ </div>
+ <p style="margin-top:40px">Geotab проверил 22 700 электромобилей 21 модели. Одни теряют вдвое меньше других — решает, <b>как</b> их заряжают.</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">3/9</div>
+ <div class="kick">Привычка 1</div>
+ <h2>Быстрая зарядка — только в дороге</h2>
+ <div class="card">
+  <div class="row"><span>DC меньше 12% зарядок</span><span class="g">1,5%/год</span></div>
+  <div class="row"><span>DC больше 12%</span><span class="r">2,5%/год</span></div>
+ </div>
+ <p style="margin-top:40px">Чаще 1 из 8 зарядок на быстрой станции — батарея стареет в 1,7 раза быстрее.</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">4/9</div>
+ <div class="kick">Привычка 2</div>
+ <h2>Мощнее 100&nbsp;кВт — главный стресс</h2>
+ <div class="big r">3,0%</div>
+ <p>в год теряют машины, которые часто заряжают на 100+ кВт. Через 8 лет — <span class="r">76%</span> против <span class="g">88%</span> у тех, кто редко ездит на DC.</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">5/9</div>
+ <div class="kick">Привычка 3</div>
+ <h2>Не держи на 0% и 100%</h2>
+ <p style="margin-bottom:10px">Потеря в год — по тому, сколько времени батарея ниже 20% или выше 80%:</p>
+ <div class="card">
+  <div class="row"><span>Меньше половины времени</span><span class="g">1,4%</span></div>
+  <div class="row"><span>Больше 80% времени</span><span class="r">2,0%</span></div>
+ </div>
+ <p style="margin-top:40px">Вредит не 100% перед дорогой, а когда машина <b>неделями стоит</b> полной или пустой.</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">6/9</div>
+ <div class="kick">Привычка 4</div>
+ <h2>Жара старит батарею</h2>
+ <div class="big y">+0,4%</div>
+ <p>в год — столько добавляет жаркий климат. Летом в жару ставь машину в тень или на подземный паркинг.</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">7/9</div>
+ <div class="kick">Привычка 5 · +экономия</div>
+ <h2>Медленно, дома, ночью</h2>
+ <div class="card">
+  <div class="row"><span>100 км, Malanka DC</span><span class="r">13,14 руб</span></div>
+  <div class="row"><span>100 км, дома ночью</span><span class="g">3,28 руб</span></div>
+  <div class="row"><span>Москва, дома ночью</span><span class="g">≈ 87 ₽</span></div>
+ </div>
+ <img class="photo" style="width:300px;height:300px;margin-top:40px" src="../assets/site/IMG_3930-Photoroom.jpg">
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">8/9</div>
+ <h2>Чек-лист: батарея на 88%</h2>
+ <ul>
+  <li>Каждый день — медленно, дома</li>
+  <li>Быструю DC — только в дороге</li>
+  <li>100+ кВт — когда правда спешишь</li>
+  <li>Не оставляй на 0% и 100% надолго</li>
+  <li>В жару — тень или паркинг</li>
+ </ul>
+ <p class="src">Geotab, 22 700 EV, май 2025. Тарифы РБ с 01.03.2026, Москва — с 01.10.2026</p>
+ <div class="handle">@ev.belarus</div>
+</section>
+
+<section class="slide">
+ <div class="num">9/9</div>
+ <h2>Как заряжаешь <span class="g">ты</span>?</h2>
+ <p>Напиши модель машины в комментариях — подскажем, какая домашняя зарядка нужна, чтобы на быструю ездить только в дороге.</p>
+ <div class="btn">Подбор → @ev_car_by</div>
+ <img class="photo" style="width:300px;height:300px" src="../assets/site/TushkaB332_new_logo-Photoroom.jpg">
+ <div class="handle">@ev.belarus</div>
+</section>
+</body></html>
