@@ -1,0 +1,63 @@
+name: telegram-inbox
+# Забирает сообщения владельца из бота в inbox/new/*.json этого репозитория (ветка media).
+# getUpdates БЕЗ offset: апдейты не подтверждаются, основному боту не мешаем. Дубли отсекаем по inbox/seen.txt.
+# Если у бота стоит webhook, Telegram вернёт 409 — тогда шаг просто завершится без ошибок.
+on:
+  schedule:
+    - cron: "17,47 5-20 * * *"   # 8:17–23:47 по Минску
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: { group: telegram-inbox, cancel-in-progress: false }
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: media }
+      - name: Fetch
+        env:
+          TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: "1815051556"
+        run: |
+          python3 - <<'EOF'
+          import json, os, urllib.request, urllib.parse, urllib.error
+          tok = os.environ["TOKEN"]; chat = int(os.environ["CHAT_ID"])
+          os.makedirs("inbox/new", exist_ok=True); os.makedirs("inbox/done", exist_ok=True); os.makedirs("inbox/media", exist_ok=True)
+          seen_f = "inbox/seen.txt"
+          seen = set(open(seen_f).read().split()) if os.path.exists(seen_f) else set()
+          def api(method, **p):
+              url = f"https://api.telegram.org/bot{tok}/{method}?" + urllib.parse.urlencode(p)
+              return json.load(urllib.request.urlopen(url, timeout=60))
+          try:
+              r = api("getUpdates", limit=100, timeout=0)
+          except urllib.error.HTTPError as e:
+              print("::warning::getUpdates", e.code, e.read()[:200]); raise SystemExit(0)
+          n = 0
+          for u in r.get("result", []):
+              uid = str(u["update_id"])
+              m = u.get("message") or u.get("edited_message")
+              if uid in seen or not m or m.get("chat", {}).get("id") != chat: continue
+              rec = {"update_id": u["update_id"], "date": m.get("date"),
+                     "text": m.get("text") or m.get("caption") or "",
+                     "reply_to_text": (m.get("reply_to_message") or {}).get("text") or (m.get("reply_to_message") or {}).get("caption") or ""}
+              fobj = (m.get("photo") or [None])[-1] or m.get("video") or m.get("document") or m.get("video_note")
+              if fobj:
+                  try:
+                      fp = api("getFile", file_id=fobj["file_id"])["result"]["file_path"]
+                      ext = os.path.splitext(fp)[1] or ".bin"
+                      dst = f"inbox/media/{uid}{ext}"
+                      urllib.request.urlretrieve(f"https://api.telegram.org/file/bot{tok}/{fp}", dst)
+                      rec["media_file"] = dst
+                  except Exception as e:
+                      rec["media_error"] = str(e)[:200]
+              json.dump(rec, open(f"inbox/new/{uid}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+              seen.add(uid); n += 1
+          open(seen_f, "w").write("\n".join(sorted(seen)) + "\n")
+          print("new:", n)
+          EOF
+      - name: Commit
+        run: |
+          git config user.name "inbox-bot"; git config user.email "inbox-bot@users.noreply.github.com"
+          git add -A inbox; git diff --cached --quiet && exit 0
+          git commit -m "telegram: входящие [skip ci]"; git pull --rebase -q origin media; git push -q origin HEAD:media
